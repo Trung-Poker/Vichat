@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "email" : "trunggl1999@gmail.com",
+  "gender" : "male",
+  "password" : "12345678",
+  "password_confirmation" : "12345678"
+}

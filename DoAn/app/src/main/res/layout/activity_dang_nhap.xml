@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#E7E7E7"
+    tools:context=".Activity.DangNhapActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="10dp"
+                android:padding="16dp"
+                android:src="#2096DA" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Đăng nhập vào Vi-Chat"
+                android:textColor="#2096DA"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/editEmailDN"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_person_white_24dp"
+                android:drawablePadding="12dp"
+                android:ems="0"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:text="17521156@gm.uit.edu.vn"
+                android:textColorHint="#2096DA" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f9d7db" />
+
+            <EditText
+                android:id="@+id/editPasswordDN"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_lock_white_24dp"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:text="Minhtri07011999@@"
+                android:textColorHint="#2096DA" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f9d7db" />
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/chkMK"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:text="Nhớ mật khẩu"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnDangNhap"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="23dp"
+                android:background="#2096DA"
+                android:clickable="true"
+                android:padding="14dp"
+                android:text="Đăng nhập"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btnDangKy"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="16dp"
+                android:background="#2096DA"
+                android:clickable="true"
+                android:maxLines="1"
+                android:minHeight="45dip"
+                android:padding="16dp"
+                android:text="Đăng kí"
+
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/forget_pass"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="Quên mật khẩu?"
+                android:textColor="#2096DA" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
