@@ -3,6 +3,8 @@
     <string name="title_activity_dang_nhap">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="facebook_app_id">1455106501307423</string>
+    <string name="facebook_login_protocol_scheme">fb1455106501307423</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
