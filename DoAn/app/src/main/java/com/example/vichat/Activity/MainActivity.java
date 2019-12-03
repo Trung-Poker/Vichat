@@ -12,7 +12,7 @@ import com.example.vichat.R;
 
 public class MainActivity extends Activity {
 
-    public static int DELAY_TIME = 1000;
+    public static int DELAY_TIME = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

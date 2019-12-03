@@ -20,7 +20,6 @@
         android:inputType="textPersonName"
         android:maxLines="1"
         android:paddingBottom="2dp"
-        android:text="Trí"
         android:textSize="35dp"
         android:textColor="#fff"
         android:textColorHint="#fff" />

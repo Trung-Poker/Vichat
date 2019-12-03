@@ -22,11 +22,11 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:padding="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/con2_vichat" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Đăng ký thành viên YoYo Chat"
+                android:text="Đăng ký thành viên Vi-Chat"
                 android:gravity="center"
                 android:textSize="18dp"
                 android:textColor="#2096DA"/>
@@ -42,15 +42,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_person_white_24dp"
                 android:drawablePadding="12dp"
                 android:ems="0"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:paddingBottom="20dp"
-                android:text="trunggl19999@gmail.com"
+                android:paddingBottom="10dp"
                 android:textColorHint="#2096DA" />
 
             <View
@@ -86,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_lock_white_24dp"
                 android:drawablePadding="12dp"
                 android:ems="10"
@@ -94,8 +93,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingTop="8dp"
-                android:paddingBottom="20dp"
-                android:text="Trung123@"
+                android:paddingBottom="10dp"
                 android:textColorHint="#2096DA" />
             <View
                 android:layout_width="match_parent"
@@ -107,16 +105,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_lock_white_24dp"
                 android:drawablePadding="12dp"
-                android:ems="10"
+                android:ems="5"
                 android:hint="Nhập lại mật khẩu"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingTop="8dp"
                 android:paddingBottom="20dp"
-                android:text="Trung123@"
                 android:textColorHint="#2096DA" />
             <View
                 android:layout_width="match_parent"
@@ -144,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:background="#2096DA"
+                android:background="@drawable/button_selector"
                 android:clickable="true"
                 android:textStyle="bold"
                 android:padding="16dp"
