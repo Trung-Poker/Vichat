@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,14 @@ import com.example.vichat.Networking.AddCookiesInterceptor;
 import com.example.vichat.Networking.ReceivedCookiesInterceptor;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
+=======
+import com.example.vichat.Networking.APIClient;
+import com.example.vichat.Model.Results;
+import com.example.vichat.R;
+import com.example.vichat.Networking.RequestApi;
+>>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
 import com.example.vichat.menuActivity;
+import com.example.vichat.ui.UserProfileFragment;
 
 import org.json.JSONObject;
 
@@ -85,8 +93,13 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+<<<<<<< HEAD
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
         startActivity(intent);
+=======
+        //Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
+        //startActivity(intent);
+>>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
         //tu dang nhap
 
         final Retrofit retrofit = APIClient.getClient();
@@ -104,8 +117,11 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                     if (status == 200) {
                         signInSucceed(email);
                         System.out.println(email);
+<<<<<<< HEAD
                         new AddCookiesInterceptor();
                         new ReceivedCookiesInterceptor();
+=======
+>>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
                     } else {
                         signInFailed(a.getMgs());
                     }
