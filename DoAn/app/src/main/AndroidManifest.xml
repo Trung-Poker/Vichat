@@ -13,12 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MessageActivity"></activity>
+        <activity android:name=".Activity.XacNhanResetPassActivity"></activity>
+        <activity android:name=".Activity.MessageActivity" />
         <activity
             android:name=".menuActivity"
-            android:label="@string/title_activity_menu"
-
-            />
+            android:label="@string/title_activity_menu" />
         <activity android:name=".Activity.ResetMkActivity" />
         <activity android:name=".Activity.DangKiActivity" />
         <activity android:name=".Activity.DangNhapActivity" />

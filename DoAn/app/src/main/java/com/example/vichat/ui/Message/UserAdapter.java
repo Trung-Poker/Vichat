@@ -43,11 +43,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final UserChat user = mUser.get(position);
         holder.username.setText(user.getName());
-        if (user.getImageURL().equals("default")) {
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        } else {
-            Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
-        }
+        //if (user.getImageURL().equals("default")) {
+            //holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        //} else {
+            //Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
+        //}
         /*
         if (isChat) {
             showLastMessage(user.getId(), holder.last_msg);
@@ -86,16 +86,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView username;
         public ImageView profile_image;
-        private ImageView img_on;
-        private ImageView img_off;
+        //private ImageView img_on;
+        //private ImageView img_off;
         private TextView last_msg;
 
         public ViewHolder(View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username);
             profile_image = itemView.findViewById(R.id.profile_image);
-            img_on = itemView.findViewById(R.id.img_on);
-            img_off = itemView.findViewById(R.id.img_off);
+            //img_on = itemView.findViewById(R.id.img_on);
+            //img_off = itemView.findViewById(R.id.img_off);
             last_msg = itemView.findViewById(R.id.last_msg);
         }
     }

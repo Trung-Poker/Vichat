@@ -1,31 +1,25 @@
 package com.example.vichat.Activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.vichat.APIClient;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vichat.Model.Results;
-import com.example.vichat.Model.result2;
+import com.example.vichat.Networking.APIClient;
+import com.example.vichat.Networking.AddCookiesInterceptor;
+import com.example.vichat.Networking.ReceivedCookiesInterceptor;
+import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
-import com.example.vichat.RequestApi;
 import com.example.vichat.menuActivity;
 
 import org.json.JSONObject;
-
-import java.util.concurrent.Delayed;
-
-import javax.xml.transform.Result;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,7 +71,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     private void signIn() {
         //btnDangNhap.setVisibility(View.GONE);
         //pbLoading.setVisibility(View.VISIBLE);
-        String email = editEmailDN.getText().toString();
+        final String email = editEmailDN.getText().toString();
         String pws = editPasswordDN.getText().toString();
 
         if (email.isEmpty()) {
@@ -90,14 +84,12 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
             editPasswordDN.requestFocus();
             return;
         }
+
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
         startActivity(intent);
-
-        //Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
-        //startActivity(intent);
         //tu dang nhap
 
-        Retrofit retrofit = APIClient.getClient();
+        final Retrofit retrofit = APIClient.getClient();
 
         RequestApi requestApi = retrofit.create(RequestApi.class);
 
@@ -106,26 +98,21 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
         call.enqueue(new Callback<Results>() {
             @Override
             public void onResponse(Call<Results> call, Response<Results> response) {
-
-                //String A = a.toString();
                 try {
-
                     Results a = (Results) response.body();
-                    System.out.println(a);
-                    String b = a.getMgs();
                     int status = a.getStatus();
-                    System.out.println(status);
                     if (status == 200) {
-                        signInSucceed();
-
+                        signInSucceed(email);
+                        System.out.println(email);
+                        new AddCookiesInterceptor();
+                        new ReceivedCookiesInterceptor();
                     } else {
-                        signInFailed(b);
+                        signInFailed(a.getMgs());
                     }
                 }catch (Exception e)
                 {
                     System.out.println(e);
                 }
-                //System.out.println(b);
 
 
                 btnDangNhap.setVisibility(View.VISIBLE);
@@ -139,10 +126,10 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
-    public void signInSucceed() {
+    public void signInSucceed(String email) {
         new AlertDialog.Builder(this).setTitle("Đăng nhập thành công").show();
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
-        //intent.putExtra("ID", userId);
+        intent.putExtra("email", email);
         startActivity(intent);
         finish();
     }

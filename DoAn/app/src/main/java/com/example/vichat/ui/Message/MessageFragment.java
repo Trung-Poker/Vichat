@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vichat.Model.ChatList;
 import com.example.vichat.Model.User;
 import com.example.vichat.Model.UserChat;
 import com.example.vichat.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageFragment extends Fragment {
@@ -22,7 +24,7 @@ public class MessageFragment extends Fragment {
     private RecyclerView recyclerView;
     private UserAdapter UserAdapter;
     private List<UserChat> mUser;
-    private List<User> usersList;
+    private List<ChatList> usersList;
 
     @Override
     public View onCreateView( LayoutInflater inflater,
@@ -32,6 +34,10 @@ public class MessageFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //ArrayList;
+        //UserAdapter = new UserAdapter(getContext(),mUser,false);
+        //recyclerView.setAdapter(UserAdapter);
         return view;
+
     }
 }

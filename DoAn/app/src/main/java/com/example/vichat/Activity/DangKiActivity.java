@@ -16,16 +16,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vichat.APIClient;
+import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Model.Results;
 import com.example.vichat.Model.User;
 import com.example.vichat.R;
-import com.example.vichat.RequestApi;
-
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.vichat.Networking.RequestApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
