@@ -45,7 +45,7 @@
                 android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_person_white_24dp"
                 android:drawablePadding="12dp"
-                android:ems="0"
+                android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -108,12 +108,12 @@
                 android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_lock_white_24dp"
                 android:drawablePadding="12dp"
-                android:ems="5"
+                android:ems="10"
                 android:hint="Nhập lại mật khẩu"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingTop="8dp"
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
                 android:textColorHint="#2096DA" />
             <View
                 android:layout_width="match_parent"

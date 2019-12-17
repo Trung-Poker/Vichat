@@ -4,24 +4,18 @@ import com.example.vichat.Model.Results;
 import com.example.vichat.Model.User;
 import com.example.vichat.Model.UserResults;
 
-import javax.xml.transform.Result;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface RequestApi {
 
-    @GET("/users/getInfoUser")
-    Call<UserResults> getInfoUser(@Field("email") String email);
+    @FormUrlEncoded
+    @POST("/users/getInfoUser")
+    Call<UserResults> getInfoUser(@Field("token") String token);
 
     @FormUrlEncoded
     @POST("/forgotPassword/getCodeVerify")
@@ -40,7 +34,7 @@ public interface RequestApi {
 
    @FormUrlEncoded
     @POST("/login/local")
-    Call<Results> signIn(@Field("keyfinduser") String email, @Field("password") String password);
+    Call<Results> signIn(@Field("email") String email, @Field("password") String password);
 
    //cache
    /*@Headers({

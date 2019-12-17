@@ -1,31 +1,24 @@
 package com.example.vichat.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-<<<<<<< HEAD
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vichat.Model.Results;
 import com.example.vichat.Networking.APIClient;
-import com.example.vichat.Networking.AddCookiesInterceptor;
-import com.example.vichat.Networking.ReceivedCookiesInterceptor;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
-=======
-import com.example.vichat.Networking.APIClient;
-import com.example.vichat.Model.Results;
-import com.example.vichat.R;
-import com.example.vichat.Networking.RequestApi;
->>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
 import com.example.vichat.menuActivity;
-import com.example.vichat.ui.UserProfileFragment;
 
 import org.json.JSONObject;
 
@@ -42,17 +35,19 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     JSONObject json;
     ProgressBar pbLoading;
     TextView forgot_pass;
+    public static final String MyPREFERENCES = "MyVichat";
+    public static final String xToken = "TokenId";
+    SharedPreferences sharedpreferences; //tao cac doi tuong SharedPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
-        editEmailDN = findViewById(R.id.editEmailDN);
-        editPasswordDN = findViewById(R.id.editPasswordDN);
-        chkMK = findViewById(R.id.chkMK);
-        pbLoading = findViewById(R.id.pbLoading);
-        btnDangKy = findViewById(R.id.btnDangKy);
-        forgot_pass = findViewById(R.id.forget_pass);
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        initWidgets();//anh xa du lieu
+        System.out.println(sharedpreferences.getString(xToken,""));
+        Toast.makeText(getApplicationContext(),sharedpreferences.getString(xToken,""),Toast.LENGTH_SHORT);
         forgot_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,9 +62,19 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
             }
         });
-        btnDangNhap = findViewById(R.id.btnDangNhap);
         btnDangNhap.setOnClickListener(this);
     }
+
+    private void initWidgets() {
+        editEmailDN = findViewById(R.id.editEmailDN);
+        editPasswordDN = findViewById(R.id.editPasswordDN);
+        chkMK = findViewById(R.id.chkMK);
+        pbLoading = findViewById(R.id.pbLoading);
+        btnDangKy = findViewById(R.id.btnDangKy);
+        forgot_pass = findViewById(R.id.forget_pass);
+        btnDangNhap = findViewById(R.id.btnDangNhap);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -93,13 +98,9 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-<<<<<<< HEAD
-        Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
-        startActivity(intent);
-=======
+
         //Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
         //startActivity(intent);
->>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
         //tu dang nhap
 
         final Retrofit retrofit = APIClient.getClient();
@@ -115,13 +116,11 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                     Results a = (Results) response.body();
                     int status = a.getStatus();
                     if (status == 200) {
-                        signInSucceed(email);
-                        System.out.println(email);
-<<<<<<< HEAD
-                        new AddCookiesInterceptor();
-                        new ReceivedCookiesInterceptor();
-=======
->>>>>>> 270daf8ce4d49ceccca3592d6234d444cd3cbfc3
+                        clearData();
+                        saveData(a.getMgs());
+                        signInSucceed();
+
+                        System.out.println(a.getMgs());
                     } else {
                         signInFailed(a.getMgs());
                     }
@@ -142,10 +141,9 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
-    public void signInSucceed(String email) {
+    public void signInSucceed() {
         new AlertDialog.Builder(this).setTitle("Đăng nhập thành công").show();
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
-        intent.putExtra("email", email);
         startActivity(intent);
         finish();
     }
@@ -156,6 +154,18 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                 .setPositiveButton("OK", null)
                 .setCancelable(true)
                 .show();
+    }
+
+    private void clearData() {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    private void saveData(String token) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(xToken, token );
+        editor.commit();
     }
 }
 
