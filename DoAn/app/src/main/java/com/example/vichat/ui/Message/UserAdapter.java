@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.vichat.Activity.MessageActivity;
 import com.example.vichat.Model.UserChat;
 import com.example.vichat.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,12 +42,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final UserChat user = mUser.get(position);
-        holder.username.setText(user.getName());
-        //if (user.getImageURL().equals("default")) {
-            //holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        //} else {
+        holder.username.setText(user.getUsername());
+        if (user.getAvatar().equals("")) {
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        } else {
+            Picasso.get().load("http://192.168.43.60:8017/download/images/"+user.getAvatar()).into(holder.profile_image);
             //Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
-        //}
+        }
         /*
         if (isChat) {
             showLastMessage(user.getId(), holder.last_msg);
@@ -72,7 +73,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getId());
+                intent.putExtra("userid", user.getUserId());
                 mContext.startActivity(intent);
             }
         });

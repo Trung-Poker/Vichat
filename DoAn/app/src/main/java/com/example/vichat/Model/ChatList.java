@@ -1,17 +1,33 @@
 package com.example.vichat.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class ChatList {
-    String id;
 
-    public ChatList(String id) {
-        this.id = id;
+    @SerializedName("Status")
+    @Expose
+    private Integer status;
+    @SerializedName("conversations")
+    @Expose
+    private List<UserChat> conversations = null;
+
+    public Integer getStatus() {
+        return status;
     }
 
-    public String getId() {
-        return id;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public List<UserChat> getConversations() {
+        return conversations;
     }
+
+    public void setConversations(List<UserChat> conversations) {
+        this.conversations = conversations;
+    }
+
 }

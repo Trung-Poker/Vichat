@@ -18,6 +18,7 @@ import com.example.vichat.Model.UserResults;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -62,7 +63,7 @@ public class UserProfileFragment extends Fragment {
     {
         Retrofit retrofit = APIClient.getClient();
 
-        RequestApi requestApi = retrofit.create(RequestApi.class);
+        final RequestApi requestApi = retrofit.create(RequestApi.class);
 
         Call<UserResults> call = requestApi.getInfoUser(emailUser);
         call.enqueue(new Callback<UserResults>() {
@@ -73,12 +74,16 @@ public class UserProfileFragment extends Fragment {
                 username.setText(response.body().getUsername());
                 address.setText(response.body().getAddress());
                 phone.setText(response.body().getPhone());
+                final String UrlImage = response.body().getAvartar();
+                Picasso.get().load("http://10.238.239.70:8017/download/images/" + UrlImage).into(image_profile);
             }
             @Override
             public void onFailure(Call<UserResults> call, Throwable t) {
 
             }
-    });
+        });
+
+
     }
 
 }

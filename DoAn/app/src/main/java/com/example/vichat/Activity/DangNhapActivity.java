@@ -46,7 +46,6 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         initWidgets();//anh xa du lieu
-        System.out.println(sharedpreferences.getString(xToken,""));
         Toast.makeText(getApplicationContext(),sharedpreferences.getString(xToken,""),Toast.LENGTH_SHORT);
         forgot_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +61,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
             }
         });
+        //btnDangNhap.setOnClickListener(this);
         btnDangNhap.setOnClickListener(this);
     }
 
@@ -119,14 +119,12 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
                         clearData();
                         saveData(a.getMgs());
                         signInSucceed();
-
-                        System.out.println(a.getMgs());
                     } else {
                         signInFailed(a.getMgs());
                     }
                 }catch (Exception e)
                 {
-                    System.out.println(e);
+                    System.out.println("con me may");
                 }
 
 

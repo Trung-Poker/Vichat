@@ -1,5 +1,6 @@
 package com.example.vichat.Networking;
 
+import com.example.vichat.Model.ChatList;
 import com.example.vichat.Model.Results;
 import com.example.vichat.Model.User;
 import com.example.vichat.Model.UserResults;
@@ -35,6 +36,10 @@ public interface RequestApi {
    @FormUrlEncoded
     @POST("/login/local")
     Call<Results> signIn(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/conversation/getConversation")
+    Call<ChatList> getConversation(@Field("token" ) String token);
 
    //cache
    /*@Headers({

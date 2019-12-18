@@ -1,18 +1,18 @@
 package com.example.vichat.Model;
 
 public class UserResults {
-    String username, email, phone, address, avartar;
+    String username, email, phone, address, avatar;
 
     public UserResults()
     {
         return;
     }
-    public UserResults(String username, String email, String phone, String address, String avartar) {
+    public UserResults(String username, String email, String phone, String address, String avatar) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.avartar = avartar;
+        this.avatar = avatar;
     }
 
     public String getUsername() {
@@ -48,10 +48,10 @@ public class UserResults {
     }
 
     public String getAvartar() {
-        return avartar;
+        return avatar;
     }
 
     public void setAvartar(String avartar) {
-        this.avartar = avartar;
+        this.avatar = avartar;
     }
 }

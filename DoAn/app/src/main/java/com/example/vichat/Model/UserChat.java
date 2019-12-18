@@ -1,53 +1,75 @@
 package com.example.vichat.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
 public class UserChat {
-    public String id, name, email, imageURL, status;
 
-    public UserChat(String id, String name, String email, String imageURL, String status) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.imageURL = imageURL;
-        this.status = status;
+    @SerializedName("conversationId")
+    @Expose
+    private String conversationId;
+    @SerializedName("userId")
+    @Expose
+    private String userId;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("avatar")
+    @Expose
+    private String avatar;
+    @SerializedName("lastMessage")
+    @Expose
+    private String lastMessage;
+    @SerializedName("conversationType")
+    @Expose
+    private Integer conversationType;
+
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public String getId() {
-        return id;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUsername() {
+        return username;
     }
 
-    public String getEmail() {
-        return email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public String getLastMessage() {
+        return lastMessage;
     }
 
-    public String getStatus() {
-        return status;
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public Integer getConversationType() {
+        return conversationType;
+    }
+
+    public void setConversationType(Integer conversationType) {
+        this.conversationType = conversationType;
     }
 }
