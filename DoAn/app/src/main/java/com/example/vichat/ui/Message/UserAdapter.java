@@ -46,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         if (user.getAvatar().equals("")) {
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
-            Picasso.get().load("http://192.168.43.60:8017/download/images/"+user.getAvatar()).into(holder.profile_image);
+            Picasso.get().load("http://172.30.203.7:8017/download/images/"+user.getAvatar()).into(holder.profile_image);
             //Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
         }
         /*
@@ -73,7 +73,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getUserId());
+                System.out.println(user.getUsername());
+                System.out.println(user.getUserId());
+                System.out.println(user.getAvatar());
+                intent.putExtra("UserId", user.getUserId());
+                intent.putExtra("user_name",user.getUsername());
+                intent.putExtra("Url_avatar", user.getAvatar());
                 mContext.startActivity(intent);
             }
         });

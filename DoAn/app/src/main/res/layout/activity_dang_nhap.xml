@@ -47,7 +47,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingBottom="10dp"
-                android:text="userTest4@gmail.com"
+                android:text="userTest1@gmail.com"
                 android:textColorHint="#2096DA" />
 
             <View

@@ -1,10 +1,12 @@
 package com.example.vichat.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
@@ -12,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vichat.Model.Results;
 import com.example.vichat.Networking.APIClient;
@@ -27,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class DangNhapActivity extends AppCompatActivity implements View.OnClickListener {
+public class DangNhapActivity extends Activity implements View.OnClickListener {
 
     TextView editEmailDN, editPasswordDN;
     Button btnDangKy, btnDangNhap;
@@ -42,6 +43,7 @@ public class DangNhapActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_dang_nhap);
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);

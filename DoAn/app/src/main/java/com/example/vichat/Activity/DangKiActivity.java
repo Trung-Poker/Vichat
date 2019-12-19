@@ -1,8 +1,5 @@
 package com.example.vichat.Activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +13,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vichat.Networking.APIClient;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vichat.Model.Results;
 import com.example.vichat.Model.User;
-import com.example.vichat.R;
+import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
+import com.example.vichat.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +65,6 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(DialogInterface dialog, int which){
         Intent intent = new Intent(this, DangNhapActivity.class);
-        intent.putExtra("ID", userId);
         startActivity(intent);
         finish();
         //OnClick Dialog.

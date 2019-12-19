@@ -2,6 +2,7 @@ package com.example.vichat.Networking;
 
 import com.example.vichat.Model.ChatList;
 import com.example.vichat.Model.Results;
+import com.example.vichat.Model.ResultsChat;
 import com.example.vichat.Model.User;
 import com.example.vichat.Model.UserResults;
 
@@ -41,15 +42,9 @@ public interface RequestApi {
     @POST("/conversation/getConversation")
     Call<ChatList> getConversation(@Field("token" ) String token);
 
-   //cache
-   /*@Headers({
-           "Static-Header1: 123"
-           Us
-   })
+    @FormUrlEncoded
+    @POST("/messages/getMessages")
+    Call<ResultsChat> getMessages(@Field("token" ) String token,@Field("uid") String uid);
 
-    @POST("/user")
-    Call<Results> listUser(
-            @Header("Cache_Control" String cache),
-            @Body User user
-   )*/
+
 }

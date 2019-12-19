@@ -3,7 +3,6 @@ package com.example.vichat.ui.Message;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,27 +48,26 @@ public class MessageFragment extends Fragment {
         sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         usersList = new ArrayList<>();
         //ArrayList<UserAdapter> arrayList = new ArrayList<>();
-        System.out.println("123");
         InsertUser(sharedpreferences.getString(xToken, ""));
-        System.out.println("123");
 
 
 
         // add du lieu()
         //ArrayList;
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 UserAdapter = new UserAdapter(getContext(),mUser,false);
                 recyclerView.setAdapter(UserAdapter);
             }
-        },500);
+        },500);*/
         //UserAdapter = new UserAdapter(getContext(),mUser,false);
         //recyclerView.setAdapter(UserAdapter);
         return view;
 
     }
-    private void InsertUser(String Token){
+    private void InsertUser(String Token)
+    {
         Retrofit retrofit = APIClient.getClient();
 
         final RequestApi requestApi = retrofit.create(RequestApi.class);
@@ -82,13 +80,11 @@ public class MessageFragment extends Fragment {
                     ChatList a = (ChatList) response.body();
                     int status = a.getStatus();
                     if (status == 200) {
-                        List<UserChat> _user = (List<UserChat>)a.getConversations();
-                        if (!_user.isEmpty()){
+                        List<UserChat> User = (List<UserChat>)a.getConversations();
+                        if (!User.isEmpty()){
                             mUser = (List<UserChat>)a.getConversations();
-                            for(UserChat user : mUser)
-                            {
-                                System.out.println(user.getUserId());
-                            }
+                            UserAdapter = new UserAdapter(getContext(),mUser,false);
+                            recyclerView.setAdapter(UserAdapter);
                         }
                     } else {
                         System.out.println("Fail");
