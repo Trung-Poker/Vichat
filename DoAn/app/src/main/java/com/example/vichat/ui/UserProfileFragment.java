@@ -75,7 +75,7 @@ public class UserProfileFragment extends Fragment {
                 address.setText(response.body().getAddress());
                 phone.setText(response.body().getPhone());
                 final String UrlImage = response.body().getAvartar();
-                Picasso.get().load("http://10.238.239.70:8017/download/images/" + UrlImage).into(image_profile);
+                Picasso.get().load("http://192.168.0.106:8017/download/images/" + UrlImage).into(image_profile);
             }
             @Override
             public void onFailure(Call<UserResults> call, Throwable t) {

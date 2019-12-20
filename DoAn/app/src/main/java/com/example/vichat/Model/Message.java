@@ -22,7 +22,7 @@ public class Message {
     private Boolean status;
     @SerializedName("createdAt")
     @Expose
-    private Integer createdAt;
+    private Double createdAt;
 
     public String getId() {
         return id;
@@ -64,11 +64,11 @@ public class Message {
         this.status = status;
     }
 
-    public Integer getCreatedAt() {
+    public Double getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Integer createdAt) {
+    public void setCreatedAt(Double createdAt) {
         this.createdAt = createdAt;
     }
 

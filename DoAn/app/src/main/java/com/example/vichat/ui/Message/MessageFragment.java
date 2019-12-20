@@ -34,7 +34,6 @@ public class MessageFragment extends Fragment {
     private RecyclerView recyclerView;
     private UserAdapter UserAdapter;
     private  List<UserChat> mUser;
-    private List<ChatList> usersList;
     SharedPreferences sharedpreferences;
 
     @Override
@@ -46,7 +45,6 @@ public class MessageFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        usersList = new ArrayList<>();
         //ArrayList<UserAdapter> arrayList = new ArrayList<>();
         InsertUser(sharedpreferences.getString(xToken, ""));
 

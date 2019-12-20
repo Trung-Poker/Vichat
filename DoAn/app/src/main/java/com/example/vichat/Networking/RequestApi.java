@@ -44,7 +44,10 @@ public interface RequestApi {
 
     @FormUrlEncoded
     @POST("/messages/getMessages")
-    Call<ResultsChat> getMessages(@Field("token" ) String token,@Field("uid") String uid);
+    Call<ResultsChat> getMessages(@Field("uid" ) String uid,@Field("token") String token);
 
+    @FormUrlEncoded
+    @POST("messages/sentMessage")
+    Call<Results> sentMessages(@Field("token" ) String token, @Field("uid") String uid, @Field("text") String text, @Field("conversationType") int conversationType);
 
 }
