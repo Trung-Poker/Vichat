@@ -1,48 +1,50 @@
-package com.example.vichat.ui.Message;
+package com.example.vichat.ui.Contact;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vichat.Activity.MessageActivity;
-import com.example.vichat.Networking.UrlImage;
+import com.example.vichat.Model.Contact;
 import com.example.vichat.Model.UserChat;
+import com.example.vichat.Networking.UrlImage;
 import com.example.vichat.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<UserChat> mUser;
-    private boolean isChat;//người có tin nhắn
-    String lastMessage;
+    private List<Contact> mUser;
 
-    public UserAdapter(Context mContext, List<UserChat> mUser, boolean isChat) {
+    public ContactAdapter(Context mContext, List<Contact> mUser) {
         this.mContext = mContext;
         this.mUser = mUser;
-        this.isChat = isChat;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContactAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_user, parent, false);
-        return new UserAdapter.ViewHolder(view);
+        return new ContactAdapter.ViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final UserChat user = mUser.get(position);
+    public void onBindViewHolder(@NonNull ContactAdapter.ViewHolder holder, int position) {
+        final Contact user = mUser.get(position);
         holder.username.setText(user.getUsername());
         if (user.getAvatar().equals("")) {
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -50,6 +52,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Picasso.get().load(UrlImage.getUrlImage()+user.getAvatar()).into(holder.profile_image);
             //Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
         }
+        holder.add_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }); //lam sau
         /*
         if (isChat) {
             showLastMessage(user.getId(), holder.last_msg);
@@ -70,7 +78,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
             //xét có onl ko
          */
-        holder.last_msg.setText(user.getLastMessage());
+        /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +88,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 intent.putExtra("Url_avatar", user.getAvatar());
                 mContext.startActivity(intent);
             }
-        });
+        }); */
     }
 
     @Override
@@ -91,23 +99,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView username;
         public ImageView profile_image;
-        //private ImageView img_on;
-        //private ImageView img_off;
-        private TextView last_msg;
+        public Button add_friend;
 
         public ViewHolder(View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username);
             profile_image = itemView.findViewById(R.id.profile_image);
-            //img_on = itemView.findViewById(R.id.img_on);
-            //img_off = itemView.findViewById(R.id.img_off);
-            last_msg = itemView.findViewById(R.id.last_msg);
+            add_friend = itemView.findViewById(R.id.button_add_friend);
         }
     }
-
-    private void showLastMessage(final String userid, final TextView last_msg) {
-        lastMessage = "Không có tin nhắn";
-    }
-
 }
-

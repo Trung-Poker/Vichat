@@ -1,8 +1,9 @@
 package com.example.vichat.Networking;
 
 import com.example.vichat.Model.ChatList;
-import com.example.vichat.Model.Results;
+import com.example.vichat.Model.ResultsLogin;
 import com.example.vichat.Model.ResultsChat;
+import com.example.vichat.Model.ResultsNotification;
 import com.example.vichat.Model.User;
 import com.example.vichat.Model.UserResults;
 
@@ -21,22 +22,22 @@ public interface RequestApi {
 
     @FormUrlEncoded
     @POST("/forgotPassword/getCodeVerify")
-    Call<Results> forgotpassword(@Field("email") String email);
+    Call<ResultsLogin> forgotpassword(@Field("email") String email);
 
     @FormUrlEncoded
     @PUT("/forgotPassword/setPassword")
-    Call<Results> setpassword(@Field("email") String email, @Field("code") String code, @Field("newPassword") String newpassword);
+    Call<ResultsLogin> setpassword(@Field("email") String email, @Field("code") String code, @Field("newPassword") String newpassword);
 
     @FormUrlEncoded
     @POST("/resetpassword")
-    Call<Results> resetpass(@Field("emai") String email);
+    Call<ResultsLogin> resetpass(@Field("emai") String email);
 
     @POST("/register")
-    Call<Results> signUp(@Body User.UserData user);
+    Call<ResultsLogin> signUp(@Body User.UserData user);
 
    @FormUrlEncoded
     @POST("/login/local")
-    Call<Results> signIn(@Field("email") String email, @Field("password") String password);
+    Call<ResultsLogin> signIn(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/conversation/getConversation")
@@ -48,6 +49,18 @@ public interface RequestApi {
 
     @FormUrlEncoded
     @POST("messages/sentMessage")
-    Call<Results> sentMessages(@Field("token" ) String token, @Field("uid") String uid, @Field("text") String text, @Field("conversationType") int conversationType);
+    Call<ResultsLogin> sentMessages(@Field("token" ) String token, @Field("uid") String uid, @Field("text") String text, @Field("conversationType") int conversationType);
+
+    @FormUrlEncoded
+    @POST("/notification/getNotification")
+    Call<ResultsNotification> getNotification(@Field("token" ) String token);
+
+    @FormUrlEncoded
+    @POST("/login/facebook")
+    Call<ResultsLogin> loginfacebook(@Field("uid" ) String uid, @Field("displayName" ) String displayName, @Field("gender" ) String gender, @Field("accessToken" ) String accessToken, @Field("email" ) String email );
+
+    @FormUrlEncoded
+    @POST("/login/facebook")
+    Call<ResultsLogin> logingoogle(@Field("uid" ) String uid, @Field("displayName" ) String displayName, @Field("gender" ) String gender, @Field("accessToken" ) String accessToken, @Field("email" ) String email );
 
 }

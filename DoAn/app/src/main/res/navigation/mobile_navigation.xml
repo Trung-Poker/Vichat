@@ -11,7 +11,8 @@
         android:name="com.example.vichat.ui.Message.MessageFragment"
         android:label="Tin nhắn"
         android:theme="@style/Base.CardView"
-        tools:layout="@layout/fragment_message" />
+        tools:layout="@layout/fragment_message"
+        />
 
     <fragment
         android:id="@+id/navigation_contact"
@@ -28,10 +29,10 @@
         android:id="@+id/navigation_notification"
         android:name="com.example.vichat.ui.NotificationFragment"
         android:label="Thông báo"
-        tools:layout="@layout/notification_fragment" />
+        tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/navigation_user_profile"
         android:name="com.example.vichat.ui.UserProfileFragment"
-        android:label="Nhắn tin"
-        tools:layout="@layout/user_profile_fragment" />
+        android:label="Thông tin"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

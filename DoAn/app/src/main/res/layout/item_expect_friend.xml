@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/profile_image" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userName"
+        android:id="@+id/username"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:textColor="@color/mau_chu"
+        android:textSize="22dp"
+        android:textStyle="bold"/>
+
+
+    <Button
+        android:id="@+id/button_add_friend"
+        android:background="@drawable/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:text="Hủy bỏ" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:background="@drawable/button_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/button_add_friend"
+        android:layout_marginRight="5dp"
+        android:text="Thêm" />
+</RelativeLayout>

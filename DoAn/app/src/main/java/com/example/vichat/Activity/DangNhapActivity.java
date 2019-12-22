@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.vichat.Model.Results;
+import com.example.vichat.Model.ResultsLogin;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
@@ -109,13 +110,13 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
 
         RequestApi requestApi = retrofit.create(RequestApi.class);
 
-        Call<Results> call = requestApi.signIn(email, pws);
+        Call<ResultsLogin> call = requestApi.signIn(email, pws);
 
-        call.enqueue(new Callback<Results>() {
+        call.enqueue(new Callback<ResultsLogin>() {
             @Override
-            public void onResponse(Call<Results> call, Response<Results> response) {
+            public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
                 try {
-                    Results a = (Results) response.body();
+                    ResultsLogin a = (ResultsLogin) response.body();
                     int status = a.getStatus();
                     if (status == 200) {
                         clearData();
@@ -135,7 +136,7 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<Results> call, Throwable t) {
+            public void onFailure(Call<ResultsLogin> call, Throwable t) {
 
                 signInFailed(null  );
             }
@@ -145,6 +146,8 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
         new AlertDialog.Builder(this).setTitle("Đăng nhập thành công").show();
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
         startActivity(intent);
+        // conect socket
+        // socket on(even);
         finish();
     }
     public void signInFailed(String b) {

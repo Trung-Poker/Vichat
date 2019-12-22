@@ -3,7 +3,6 @@ package com.example.vichat;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.vichat.ui.NotificationFragment;
 import com.example.vichat.ui.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

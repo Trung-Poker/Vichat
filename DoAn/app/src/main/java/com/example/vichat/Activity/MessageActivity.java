@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -16,15 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vichat.Model.Message;
-import com.example.vichat.Model.Results;
+import com.example.vichat.Model.ResultsLogin;
 import com.example.vichat.Model.ResultsChat;
-import com.example.vichat.Model.UrlImage;
+import com.example.vichat.Networking.UrlImage;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
+import com.github.nkzawa.socketio.client.Socket;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,18 +46,14 @@ public class MessageActivity extends Activity{
     RecyclerView recyclerView;
     SharedPreferences sharedpreferences;
     String UserId, UrlAvatar, UserName, UToken;
+    private Socket socket;
     //ValueEventListener seenListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_message);
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //setting recyclerView
+
         Intent intent = getIntent();
         UserId = intent.getStringExtra("UserId");
         UrlAvatar = intent.getStringExtra("Url_avatar");
@@ -68,8 +63,24 @@ public class MessageActivity extends Activity{
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
         //anhxa
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //setting recyclerView
+
+        UserId = intent.getStringExtra("UserId");
+        UrlAvatar = intent.getStringExtra("Url_avatar");
+        UserName = intent.getStringExtra("user_name");
+        username = findViewById(R.id.username);
+        profile_image = findViewById(R.id.profile_image);
+        btn_send = findViewById(R.id.btn_send);
+        text_send = findViewById(R.id.text_send);
+        //anhxa
         username.setText(UserName);
-        Picasso.get().load("http://192.168.0.106:8017/download/images/"+UrlAvatar).into(profile_image);
+        Picasso.get().load(UrlImage.getUrlImage()+UrlAvatar).into(profile_image);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         UToken = sharedpreferences.getString(xToken, "");
         InsertMessage(UToken,UserId);
@@ -81,14 +92,14 @@ public class MessageActivity extends Activity{
 
                 final RequestApi requestApi = retrofit.create(RequestApi.class);
 
-                Call<Results> call = requestApi.sentMessages(UToken, UserId, text_send.getText().toString(),0);
+                Call<ResultsLogin> call = requestApi.sentMessages(UToken, UserId, text_send.getText().toString(),0);
                 text_send.setText("");
                 try {
-                    call.enqueue(new Callback<Results>() {
+                    call.enqueue(new Callback<ResultsLogin>() {
                         @Override
-                        public void onResponse(Call<Results> call, Response<Results> response) {
+                        public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
                             try {
-                                Results a  =  response.body();
+                                ResultsLogin a  =  response.body();
                                 int status = (int) a.getStatus();
                                 if (status == 200) {
                                     System.out.println("Sent Success!");
@@ -102,7 +113,7 @@ public class MessageActivity extends Activity{
                             }
                         }
                         @Override
-                        public void onFailure(Call<Results> call, Throwable t) {
+                        public void onFailure(Call<ResultsLogin> call, Throwable t) {
                             System.out.println("error:" + t);
                         }
                     });
@@ -160,4 +171,10 @@ public class MessageActivity extends Activity{
     private void SentMessage( final String token, final String uid, final String text, final int conversationType) {
 
     }
+    /*@Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        socket.disconnect();
+    }*/
 }

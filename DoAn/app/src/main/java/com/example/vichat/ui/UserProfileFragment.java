@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ import static com.example.vichat.Activity.DangNhapActivity.xToken;
 public class UserProfileFragment extends Fragment {
 
     CircleImageView image_profile;
-    EditText username, email, phone, address, update_status;
+    TextView username, email, phone, address, update_status;
     Button btn_RePassword, btn_Save;
     SharedPreferences sharedpreferences;
     private Uri imageUri;
@@ -40,7 +41,7 @@ public class UserProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-         View view = inflater.inflate(R.layout.user_profile_fragment, container, false);
+         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
          sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
          image_profile = view.findViewById(R.id.profile_image);
@@ -75,7 +76,7 @@ public class UserProfileFragment extends Fragment {
                 address.setText(response.body().getAddress());
                 phone.setText(response.body().getPhone());
                 final String UrlImage = response.body().getAvartar();
-                Picasso.get().load("http://192.168.0.106:8017/download/images/" + UrlImage).into(image_profile);
+                Picasso.get().load(com.example.vichat.Networking.UrlImage.getUrlImage() + UrlImage).into(image_profile);
             }
             @Override
             public void onFailure(Call<UserResults> call, Throwable t) {

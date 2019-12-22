@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.vichat.Model.Results;
+import com.example.vichat.Model.ResultsLogin;
 import com.example.vichat.Model.User;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
@@ -27,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class DangKiActivity extends AppCompatActivity implements View.OnClickListener, Callback<Results> ,DialogInterface.OnClickListener{
+public class DangKiActivity extends AppCompatActivity implements View.OnClickListener, Callback<ResultsLogin> ,DialogInterface.OnClickListener{
 
     private EditText editName, editEmail, editPassword, editRePassword;
     private ProgressBar pbLoading;
@@ -106,15 +106,15 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
 
         RequestApi callApi = retrofit.create(RequestApi.class);
 
-        Call<Results> call = callApi.signUp(userData);
+        Call<ResultsLogin> call = callApi.signUp(userData);
 
         call.enqueue(this);
         //khai bao Retrofit gui du lieu cua user data
     }
 
     @Override
-    public void onResponse(Call<Results> call, Response<Results> response) {
-        Results result = (Results) response.body();
+    public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
+        ResultsLogin result = (ResultsLogin) response.body();
         int status = result.getStatus();
         if(result.getMgs() != null)
         System.out.println(status);
@@ -128,7 +128,7 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onFailure(Call<Results> call, Throwable t) {
+    public void onFailure(Call<ResultsLogin> call, Throwable t) {
         signUpFailed(null);
     }
 

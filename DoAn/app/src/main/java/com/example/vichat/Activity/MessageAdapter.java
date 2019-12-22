@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vichat.Model.Message;
-import com.example.vichat.Model.UrlImage;
+import com.example.vichat.Networking.UrlImage;
 import com.example.vichat.R;
 import com.squareup.picasso.Picasso;
 
@@ -37,10 +37,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == MSG_TYPE_RIGHT) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_chat_right, parent, false);
             return new MessageAdapter.ViewHolder(view);
         } else {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, parent, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_chat_left, parent, false);
             return new MessageAdapter.ViewHolder(view);
         }
     }
@@ -50,9 +50,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Message chat = mChat.get(position);
         holder.show_message.setText(chat.getText());
         if (imageurl.equals(null)) {
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            holder.profile_image.setImageResource(R.drawable.ic_person_white_24dp);
         } else {
-            Picasso.get().load("http://192.168.0.106:8017/download/images/"+imageurl).into(holder.profile_image);
+            Picasso.get().load(UrlImage.getUrlImage() +imageurl).into(holder.profile_image);
         }
         /*if (position == mChat.size() - 1){//kiểm tra lấy ra tin nhắn cuối cùng
             if (chat.getIsseen()){

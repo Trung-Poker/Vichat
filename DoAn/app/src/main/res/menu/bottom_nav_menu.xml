@@ -19,7 +19,9 @@
     <item
         android:id="@+id/navigation_notification"
         android:icon="@drawable/bell_24px"
-        android:title="Notification" />
+        android:title="Notification"
+        />
+
     <item
         android:id="@+id/navigation_user_profile"
         android:icon="@drawable/profile_50px"
