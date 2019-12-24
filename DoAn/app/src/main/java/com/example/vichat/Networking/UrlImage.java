@@ -9,5 +9,5 @@ public class UrlImage {
         UrlImage = urlImage;
     }
 
-    public static String UrlImage = "http://172.16.3.4:8017/download/images/";
+    public static String UrlImage = "http://192.168.36.207:8017/download/images/";
 }

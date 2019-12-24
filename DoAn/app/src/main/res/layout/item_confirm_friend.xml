@@ -52,13 +52,14 @@
         android:visibility="gone" />
 
     <Button
-        android:id="@+id/button_cancel"
+        android:id="@+id/button"
         android:background="@drawable/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="15dp"
-        android:text="Hủy bỏ" />
+        android:text="Hủy"
+        android:textColor="#fff"/>
 
 </RelativeLayout>

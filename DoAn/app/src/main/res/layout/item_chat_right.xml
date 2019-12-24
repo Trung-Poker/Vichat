@@ -24,7 +24,7 @@
         android:textSize="18sp"
         android:padding="8dp"
         android:textColor="#000"
-        android:background="@drawable/chat_user_left"
+        android:background="@drawable/message_right"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true" />
     <TextView

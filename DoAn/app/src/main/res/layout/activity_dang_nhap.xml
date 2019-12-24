@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Đăng nhập vào Vi-Chat"
-                android:textColor="#2096DA"
+                android:textColor="#4f4e4e"
                 android:textSize="20dp" />
 
             <EditText
@@ -47,8 +47,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingBottom="10dp"
-                android:text="userTest1@gmail.com"
-                android:textColorHint="#2096DA" />
+                android:textColorHint="#898989" />
 
             <View
                 android:layout_width="match_parent"
@@ -59,18 +58,17 @@
                 android:id="@+id/editPasswordDN"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text"
                 android:drawableLeft="@drawable/ic_lock_white_24dp"
                 android:drawablePadding="12dp"
-                android:ems="10"
+                android:ems="0"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:paddingBottom="10dp"
                 android:text="MinhTri0701@"
-                android:textColorHint="#2096DA" />
+                android:textColorHint="#898989" />
 
             <View
                 android:layout_width="match_parent"
@@ -126,7 +124,7 @@
                 android:clickable="true"
                 android:padding="16dp"
                 android:text="Quên mật khẩu?"
-                android:textColor="#2096DA" />
+                android:textColor="#898989" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

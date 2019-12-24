@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/userbackground">
+    android:background="#FFF">
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -60,4 +60,11 @@
         android:textColor="#256720"
         android:layout_marginLeft="10dp"
         android:maxLines="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_below="@+id/profile_image"
+        android:background="#000" />
 </RelativeLayout>

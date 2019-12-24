@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.vichat.Model.ResultsLogin;
+import com.example.vichat.Model.Results;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
@@ -52,13 +52,13 @@ public class ResetMkActivity extends AppCompatActivity implements View.OnClickLi
 
                     RequestApi requestApi = retrofit.create(RequestApi.class);
 
-                    Call<ResultsLogin> call = requestApi.forgotpassword(email);
+                    Call<Results> call = requestApi.forgotpassword(email);
 
-                    call.enqueue(new Callback<ResultsLogin>() {
+                    call.enqueue(new Callback<Results>() {
                         @Override
-                        public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
+                        public void onResponse(Call<Results> call, Response<Results> response) {
                             try {
-                                ResultsLogin a = (ResultsLogin) response.body();
+                                Results a = (Results) response.body();
                                 int status = a.getStatus();
                                 System.out.println(status);
                                 if (status == 200) {
@@ -74,7 +74,7 @@ public class ResetMkActivity extends AppCompatActivity implements View.OnClickLi
                         }
 
                         @Override
-                        public void onFailure(Call<ResultsLogin> call, Throwable t) {
+                        public void onFailure(Call<Results> call, Throwable t) {
                                 Failed(null);
                         }
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,18 +15,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.vichat.Model.ResultsLogin;
+import com.example.vichat.Model.Results;
 import com.example.vichat.Networking.APIClient;
+import com.example.vichat.Networking.APISocket;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
 import com.example.vichat.menuActivity;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static com.example.vichat.Networking.UrlSocket.getUrlSocket;
 
 public class DangNhapActivity extends Activity implements View.OnClickListener {
 
@@ -37,8 +44,12 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
     JSONObject json;
     ProgressBar pbLoading;
     TextView forgot_pass;
+    Socket socket;
     public static final String MyPREFERENCES = "MyVichat";
     public static final String xToken = "TokenId";
+    public static final String USERNAME = "userNameKey";
+    public static final String PASS = "passKey";
+    public static final String REMEMBER = "remember";
     SharedPreferences sharedpreferences; //tao cac doi tuong SharedPreferences
 
     @Override
@@ -49,7 +60,9 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         initWidgets();//anh xa du lieu
-        Toast.makeText(getApplicationContext(),sharedpreferences.getString(xToken,""),Toast.LENGTH_SHORT);
+
+        loadData();
+        Toast.makeText(getApplicationContext(), sharedpreferences.getString(xToken, ""), Toast.LENGTH_SHORT);
         forgot_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +101,7 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
         //btnDangNhap.setVisibility(View.GONE);
         //pbLoading.setVisibility(View.VISIBLE);
         final String email = editEmailDN.getText().toString();
-        String pws = editPasswordDN.getText().toString();
+        final String pws = editPasswordDN.getText().toString();
 
         if (email.isEmpty()) {
             editEmailDN.setError("Bạn chưa nhập Họ tên");
@@ -110,24 +123,23 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
 
         RequestApi requestApi = retrofit.create(RequestApi.class);
 
-        Call<ResultsLogin> call = requestApi.signIn(email, pws);
+        Call<Results> call = requestApi.signIn(email, pws);
 
-        call.enqueue(new Callback<ResultsLogin>() {
+        call.enqueue(new Callback<Results>() {
             @Override
-            public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
+            public void onResponse(Call<Results> call, Response<Results> response) {
                 try {
-                    ResultsLogin a = (ResultsLogin) response.body();
+                    Results a = (Results) response.body();
                     int status = a.getStatus();
                     if (status == 200) {
                         clearData();
-                        saveData(a.getMgs());
+                        saveData(a.getMgs(), email, pws);
                         signInSucceed();
                     } else {
                         signInFailed(a.getMgs());
                     }
-                }catch (Exception e)
-                {
-                    System.out.println("con me may");
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
 
 
@@ -136,19 +148,41 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<ResultsLogin> call, Throwable t) {
+            public void onFailure(Call<Results> call, Throwable t) {
 
-                signInFailed(null  );
+                signInFailed(null);
             }
         });
     }
+
     public void signInSucceed() {
-        new AlertDialog.Builder(this).setTitle("Đăng nhập thành công").show();
+        new AlertDialog.Builder(this).setTitle("Đăng nhập thành công")
+                .setPositiveButton("OK", null)
+                .setCancelable(true)
+                .show();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("token", sharedpreferences.getString(xToken, ""));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new APISocket().conectSocket("getConnectionToken", data);
+       /* try {
+
+            socket = IO.socket(getUrlSocket());
+            socket.connect();
+            JSONObject data = new JSONObject();
+            data.put("token", sharedpreferences.getString(xToken, ""));
+
+            socket.emit("getConnectionToken",data);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
         Intent intent = new Intent(DangNhapActivity.this, menuActivity.class);
         startActivity(intent);
-        // conect socket
-        // socket on(even);
-        finish();
     }
     public void signInFailed(String b) {
         new AlertDialog.Builder(this)
@@ -165,10 +199,23 @@ public class DangNhapActivity extends Activity implements View.OnClickListener {
         editor.commit();
     }
 
-    private void saveData(String token) {
+    private void saveData(String token, String username, String password) {
         SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(USERNAME, username);
+        editor.putString(PASS, password);
+        editor.putBoolean(REMEMBER,chkMK.isChecked());
         editor.putString(xToken, token );
         editor.commit();
+    }
+    private void loadData() {
+        if(sharedpreferences.getBoolean(REMEMBER,false)) {
+            editEmailDN.setText(sharedpreferences.getString(USERNAME, ""));
+            editPasswordDN.setText(sharedpreferences.getString(PASS, ""));
+            chkMK.setChecked(true);
+        }
+        else
+            chkMK.setChecked(false);
+
     }
 }
 

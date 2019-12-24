@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.XacNhanResetPassActivity"></activity>
+        <activity android:name=".Activity.ChangePasswordActivity"></activity>
+        <activity android:name=".Activity.XacNhanResetPassActivity" />
         <activity android:name=".Activity.MessageActivity" />
         <activity
             android:name=".menuActivity"

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0084AC</color>
+    <color name="colorPrimary">#0099FF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="mau_chu">#2096DA</color>
+    <color name="mau_chu">#898989</color>
+    <color name="mau_chu_profile">#4f4e4e</color>
 </resources>

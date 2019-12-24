@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/profile_image"
-        android:background="@drawable/chat_user_left"
+        android:background="@drawable/message_left"
         android:padding="8dp"
         android:text="Hello"
         android:textColor="#000"

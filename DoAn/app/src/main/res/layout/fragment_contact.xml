@@ -7,23 +7,37 @@
     android:background="#E7E7E7"
     android:orientation="vertical"
     tools:context=".ui.Contact.ContactFragment">
-
-    <SearchView
-        android:id="@+id/edit_search"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#2096DA"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Search"
-        android:inputType="textPersonName"
-        android:maxLines="1"
-        android:paddingBottom="2dp"
-        android:textSize="25sp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:tooltipText="abc"
-        android:searchIcon="@drawable/find_user_male_45px"/>
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/image_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#2096da"
+            android:paddingEnd="0dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/search_filled_40px"
+            ></ImageButton>
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:hint="Tìm kiếm"
+            android:drawableLeft="@drawable/find_user_male_45px"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:background="#2096da"
+            android:layout_toLeftOf="@+id/image_find"
+            >
+        </EditText>
+
+
+    </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vichat.Model.ChatList;
 import com.example.vichat.Model.UserChat;
 import com.example.vichat.Networking.APIClient;
+import com.example.vichat.Networking.APISocket;
+import com.example.vichat.Networking.ListenerSocket;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
 import com.github.nkzawa.socketio.client.IO;
@@ -38,6 +40,7 @@ public class MessageFragment extends Fragment {
     private UserAdapter UserAdapter;
     private  List<UserChat> mUser;
     private Socket socket;
+    private String status = "false";
     SharedPreferences sharedpreferences;
 
     @Override
@@ -51,18 +54,11 @@ public class MessageFragment extends Fragment {
         sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         //ArrayList<UserAdapter> arrayList = new ArrayList<>();
         InsertUser(sharedpreferences.getString(xToken, ""));
-
-        try {
-            System.out.println("socket");
-            socket = IO.socket("http://172.17.16.86:8017");
-            socket.connect();
-            socket.emit("chat-text", sharedpreferences.getString(xToken, "") );
-        } catch (URISyntaxException e) {
-            System.out.println(e);
-            e.printStackTrace();
-        }
-
-
+       // status = new ListenerSocket().ListenerSocketOn(getActivity(),"response-chat-text");
+       // System.out.println(status);
+       // if(status.compareTo("true") == 1 ){
+         //   InsertUser(sharedpreferences.getString(xToken, ""));
+       // }
 
 
         // add du lieu()

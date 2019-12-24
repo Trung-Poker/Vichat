@@ -29,7 +29,7 @@
                 android:text="Đăng ký thành viên Vi-Chat"
                 android:gravity="center"
                 android:textSize="18dp"
-                android:textColor="#2096DA"/>
+                android:textColor="@color/mau_chu"/>
 
 
             <View
@@ -50,7 +50,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingBottom="10dp"
-                android:textColorHint="#2096DA" />
+                android:textColorHint="@color/mau_chu" />
 
             <View
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Nam"
-                    android:textColor="#2096DA"
+                    android:textColor="#000"
                     android:textSize="16sp" />
 
                 <RadioButton
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nữ"
-                    android:textColor="#2096DA"
+                    android:textColor="#000"
                     android:textSize="16sp" />
             </RadioGroup>
 
@@ -94,7 +94,7 @@
                 android:maxLines="1"
                 android:paddingTop="8dp"
                 android:paddingBottom="10dp"
-                android:textColorHint="#2096DA" />
+                android:textColorHint="@color/mau_chu" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -114,7 +114,7 @@
                 android:maxLines="1"
                 android:paddingTop="8dp"
                 android:paddingBottom="10dp"
-                android:textColorHint="#2096DA" />
+                android:textColorHint="@color/mau_chu" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

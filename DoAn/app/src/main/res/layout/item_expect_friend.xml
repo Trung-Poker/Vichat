@@ -26,22 +26,30 @@
 
 
     <Button
-        android:id="@+id/button_add_friend"
+        android:id="@+id/button_cancel"
         android:background="@drawable/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="#fff"
         android:text="Hủy bỏ" />
 
     <Button
-        android:id="@+id/button_cancel"
-        android:background="@drawable/button_ok"
+        android:id="@+id/button"
+        android:background="@drawable/button_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/button_add_friend"
+        android:layout_toLeftOf="@id/button_cancel"
         android:layout_marginRight="5dp"
+        android:textColor="#fff"
         android:text="Thêm" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_below="@+id/profile_image"
+        android:background="#000" />
 </RelativeLayout>

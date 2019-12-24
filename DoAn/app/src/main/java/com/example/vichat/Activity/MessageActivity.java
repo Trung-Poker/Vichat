@@ -15,14 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vichat.Model.Message;
-import com.example.vichat.Model.ResultsLogin;
+import com.example.vichat.Model.Results;
 import com.example.vichat.Model.ResultsChat;
+import com.example.vichat.Networking.APISocket;
+import com.example.vichat.Networking.ListenerSocket;
 import com.example.vichat.Networking.UrlImage;
 import com.example.vichat.Networking.APIClient;
 import com.example.vichat.Networking.RequestApi;
 import com.example.vichat.R;
 import com.github.nkzawa.socketio.client.Socket;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -46,6 +51,7 @@ public class MessageActivity extends Activity{
     RecyclerView recyclerView;
     SharedPreferences sharedpreferences;
     String UserId, UrlAvatar, UserName, UToken;
+    String status = "false";
     private Socket socket;
     //ValueEventListener seenListener;
     @Override
@@ -58,6 +64,8 @@ public class MessageActivity extends Activity{
         UserId = intent.getStringExtra("UserId");
         UrlAvatar = intent.getStringExtra("Url_avatar");
         UserName = intent.getStringExtra("user_name");
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        UToken = sharedpreferences.getString(xToken, "");
         username = findViewById(R.id.username);
         profile_image = findViewById(R.id.profile_image);
         btn_send = findViewById(R.id.btn_send);
@@ -70,19 +78,9 @@ public class MessageActivity extends Activity{
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         //setting recyclerView
-
-        UserId = intent.getStringExtra("UserId");
-        UrlAvatar = intent.getStringExtra("Url_avatar");
-        UserName = intent.getStringExtra("user_name");
-        username = findViewById(R.id.username);
-        profile_image = findViewById(R.id.profile_image);
-        btn_send = findViewById(R.id.btn_send);
-        text_send = findViewById(R.id.text_send);
         //anhxa
         username.setText(UserName);
         Picasso.get().load(UrlImage.getUrlImage()+UrlAvatar).into(profile_image);
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        UToken = sharedpreferences.getString(xToken, "");
         InsertMessage(UToken,UserId);
         //SentMessage(sharedpreferences.getString(xToken, ""),UserId,username.getText().toString(),0);
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -92,17 +90,25 @@ public class MessageActivity extends Activity{
 
                 final RequestApi requestApi = retrofit.create(RequestApi.class);
 
-                Call<ResultsLogin> call = requestApi.sentMessages(UToken, UserId, text_send.getText().toString(),0);
+                Call<Results> call = requestApi.sentMessages(UToken, UserId, text_send.getText().toString(),0);
                 text_send.setText("");
                 try {
-                    call.enqueue(new Callback<ResultsLogin>() {
+                    call.enqueue(new Callback<Results>() {
                         @Override
-                        public void onResponse(Call<ResultsLogin> call, Response<ResultsLogin> response) {
+                        public void onResponse(Call<Results> call, Response<Results> response) {
                             try {
-                                ResultsLogin a  =  response.body();
+                                Results a  =  response.body();
                                 int status = (int) a.getStatus();
                                 if (status == 200) {
-                                    System.out.println("Sent Success!");
+                                     JSONObject data = new JSONObject();
+                                    try {
+                                        data.put("token",UToken);
+                                        data.put("receiverId", UserId);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                   new APISocket().conectSocket("chat-text", data);
+                                   System.out.println("Sent Success!");
                                     InsertMessage(UToken,UserId);
                                 } else {
                                     System.out.println("Fail");
@@ -113,7 +119,7 @@ public class MessageActivity extends Activity{
                             }
                         }
                         @Override
-                        public void onFailure(Call<ResultsLogin> call, Throwable t) {
+                        public void onFailure(Call<Results> call, Throwable t) {
                             System.out.println("error:" + t);
                         }
                     });
@@ -125,6 +131,11 @@ public class MessageActivity extends Activity{
 
             }
         });
+        status = new ListenerSocket().ListenerSocketOn(this,"response-chat-text");
+        System.out.println(status);
+        if(status== "true"){
+            InsertMessage(sharedpreferences.getString(xToken, ""),UserId);
+        }
     }
 
     private void InsertMessage(String token, String uid)
@@ -145,6 +156,7 @@ public class MessageActivity extends Activity{
                         if (status == 200) {
                             List<Message> User = a.getMessages();
                             if (!User.isEmpty()){
+                                System.out.println("da insert");
                                 mChat = a.getMessages();
                                 messageAdapter = new MessageAdapter(MessageActivity.this, mChat, UrlAvatar, UserId);
                                 recyclerView.setAdapter(messageAdapter);
